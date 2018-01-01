@@ -58,3 +58,18 @@ if __name__ == '__main__':
     nn = LeNet(3, n_classes, EPOCHS, rate, BATCH_SIZE, 'detect/tf_lenet')
     logits, _ = nn.train(images, labels, valid_images, valid_labels, x, y)
     print('Done training')
+
+    # im = cv2.imread('/Users/anechaev/Developer/Python/TrafficLightClassification/dataset/udacity-sdc/red-green/0.jpg')
+    # im = cv2.resize(im, (32, 32))
+    #
+    # with tf.Session() as sess:
+    #     saver = tf.train.import_meta_graph('models/detect/tf_lenet.tf.meta')
+    #     saver.restore(sess, tf.train.latest_checkpoint('models/detect'))
+    #
+    #     graph = tf.get_default_graph()
+    #     x = graph.get_tensor_by_name('x_value:0')
+    #     predictions = graph.get_tensor_by_name('predictions:0')
+    #     probabilities = graph.get_tensor_by_name('Softmax:0')
+    #
+    #     pred_nums, sf = sess.run([predictions, probabilities], feed_dict={x: [im]})
+    #     print('Result {} nums; sf = {}'.format(pred_nums, sf))
