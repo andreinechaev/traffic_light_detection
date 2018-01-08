@@ -7,21 +7,22 @@ from lenet import LeNet
 color_lb = {
     'red': 0,
     'yellow': 1,
-    'green': 2
+    'green': 2,
+    'none': 3
 }
 
 images = []
 labels = []
 
-data_path = 'dataset'
+data_path = 'dataset/simulator'
 
 # Arguments used for tf.truncated_normal, randomly defines variables for the weights and biases for each layer
 mu = 0
 sigma = 0.1
 n_classes = 3
 
-rate = 0.001
-EPOCHS = 40
+rate = 0.0001
+EPOCHS = 260
 BATCH_SIZE = 128
 
 
@@ -52,6 +53,8 @@ def read_data(path):
                     labels.append(color_lb['yellow'])
                 elif 'green' in root:
                     labels.append(color_lb['green'])
+                elif 'non_tf' in root:
+                    labels.append(color_lb['none'])
 
 
 if __name__ == '__main__':
@@ -59,7 +62,7 @@ if __name__ == '__main__':
 
     shape = images[0].shape
     print('Loaded image shape = {}'.format(shape))
-    images, valid_images, labels, valid_labels = train_test_split(images, labels, test_size=0.15, random_state=0)
+    images, valid_images, labels, valid_labels = train_test_split(images, labels, test_size=0.20, random_state=0)
     print('Loaded {} images & {} labels'.format(len(images), len(labels)))
     print('Loaded {} validation images & {} labels'.format(len(valid_images), len(valid_labels)))
 
@@ -74,7 +77,7 @@ if __name__ == '__main__':
     # im = cv2.resize(im, (32, 32))
     #
     # with tf.Session() as sess:
-    #     saver = tf.train.import_meta_graph('models/detect/lenet.tf.meta')
+    #     saver = tf.train.import_meta_graph('models/classify/lenet.tf.meta')
     #     saver.restore(sess, tf.train.latest_checkpoint('models/classify'))
     #
     #     graph = tf.get_default_graph()
